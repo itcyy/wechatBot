@@ -1,0 +1,13 @@
+
+{
+  "api_key": "key",
+  "auto_pass": true,
+  "session_timeout": 20,
+  "max_tokens": 1024,
+  "model": "gpt-3.5-turbo",
+  "temperature": 1,
+  "reply_prefix": "需要技术支持添加我 技术支持#公众号：程序员阿诺斯，来自机器人回复：",
+  "session_clear_token": "清空会话"
+}
+
+
