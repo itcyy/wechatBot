@@ -15,16 +15,16 @@ import (
 
 var c = cache.New(config.LoadConfig().SessionTimeout, time.Minute*5)
 
-// MessageHandlerInterface 消息处理接口
+
 type MessageHandlerInterface interface {
 	handle() error
 	ReplyText() error
 }
 
-// QrCodeCallBack 登录扫码回调，
+
 func QrCodeCallBack(uuid string) {
 	if runtime.GOOS == "windows" {
-		// 运行在Windows系统上
+	
 		openwechat.PrintlnQrcodeUrl(uuid)
 	} else {
 		log.Println("login in linux")
@@ -38,17 +38,16 @@ func QrCodeCallBack(uuid string) {
 func NewHandler() (msgFunc func(msg *openwechat.Message), err error) {
 	dispatcher := openwechat.NewMessageMatchDispatcher()
 
-	// 清空会话
+	
 	dispatcher.RegisterHandler(func(message *openwechat.Message) bool {
 		return strings.Contains(message.Content, config.LoadConfig().SessionClearToken)
 	}, TokenMessageContextHandler())
 
-	// 处理群消息
+	
 	dispatcher.RegisterHandler(func(message *openwechat.Message) bool {
 		return message.IsSendByGroup()
 	}, GroupMessageContextHandler())
 
-	// 好友申请
 	dispatcher.RegisterHandler(func(message *openwechat.Message) bool {
 		return message.IsFriendAdd()
 	}, func(ctx *openwechat.MessageContext) {
@@ -62,8 +61,7 @@ func NewHandler() (msgFunc func(msg *openwechat.Message), err error) {
 		}
 	})
 
-	// 私聊
-	// 获取用户消息处理器
+
 	dispatcher.RegisterHandler(func(message *openwechat.Message) bool {
 		return !(strings.Contains(message.Content, config.LoadConfig().SessionClearToken) || message.IsSendByGroup() || message.IsFriendAdd())
 	}, UserMessageContextHandler())
