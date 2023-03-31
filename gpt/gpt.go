@@ -15,7 +15,7 @@ import (
 
 const BASEURL = "https://agent-openai.ccrui.dev/v1/"
 
-// ChatGPTResponseBody 响应
+
 type ChatGPTResponseBody struct {
 	ID      string                 `json:"id"`
 	Object  string                 `json:"object"`
@@ -51,11 +51,7 @@ type Messages struct {
 	Content string `json:"content"`
 }
 
-// Completions gtp文本模型回复
-// curl https://api.openai.com/v1/completions
-// -H "Content-Type: application/json"
-// -H "Authorization: Bearer your chatGPT key"
-// -d '{"model": "text-davinci-003", "prompt": "give me good song", "temperature": 0, "max_tokens": 7}'
+
 func Text(msg string) (string, error) {
 	return msg, nil
 }
